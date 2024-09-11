@@ -1,0 +1,223 @@
+const quizData = [
+    {
+        question: "Which language runs in a web browser?",
+        a: "Java",
+        b: "C",
+        c: "Python",
+        d: "JavaScript",
+        correct: "d",
+    },
+    {
+        question: "What does CSS stand for?",
+        a: "Central Style Sheets",
+        b: "Cascading Style Sheets",
+        c: "Cascading Simple Sheets",
+        d: "Cars SUVs Sailboats",
+        correct: "b",
+    },
+    {
+        question: "What does HTML stand for?",
+        a: "Hypertext Markup Language",
+        b: "Hypertext Markdown Language",
+        c: "Hyperloop Machine Language",
+        d: "Helicopters Terminals Motorboats Lamborginis",
+        correct: "a",
+    },
+    {
+        question: "What year was JavaScript launched?",
+        a: "1996",
+        b: "1995",
+        c: "1994",
+        d: "none of the above",
+        correct: "b",
+    },
+    {
+        question: "What is the most popular programming language in the world?",
+        a: "Python",
+        b: "JavaScript",
+        c: "Java",
+        d: "C++",
+        correct: "a",
+      },
+      
+      {
+        question: "What is the purpose of the `git add` command?",
+        a: "To commit changes to the repository",
+        b: "To push changes to the remote repository",
+        c: "To stage changes for the next commit",
+        d: "To create a new branch",
+        correct: "c",
+      },
+      
+      {
+        question: "What is the difference between `var`, `let`, and `const` in JavaScript?",
+        a: "They are all used to declare variables",
+        b: "They are all used to declare constants",
+        c: "They have different scoping rules",
+        d: "They are all used to declare functions",
+        correct: "c",
+      },
+      
+      {
+        question: "What is the name of the popular front-end framework developed by Facebook?",
+        a: "React",
+        b: "Angular",
+        c: "Vue.js",
+        d: "Ember.js",
+        correct: "a",
+      },
+      
+      {
+        question: "What is the purpose of the `npm` command?",
+        a: "To manage dependencies for a project",
+        b: "To create a new project",
+        c: "To run a script",
+        d: "To debug code",
+        correct: "a",
+      },
+      
+      {
+        question: "What is the difference between a `stack` and a `queue` data structure?",
+        a: "A stack is Last-In-First-Out, while a queue is First-In-First-Out",
+        b: "A stack is First-In-First-Out, while a queue is Last-In-First-Out",
+        c: "A stack is used for sorting, while a queue is used for searching",
+        d: "A stack is used for searching, while a queue is used for sorting",
+        correct: "a",
+      },
+      
+      {
+        question: "What is the name of the popular back-end framework developed by Microsoft?",
+        a: "ASP.NET",
+        b: "Node.js",
+        c: "Ruby on Rails",
+        d: "Django",
+        correct: "a",
+      },
+      
+      {
+        question: "What is the purpose of the `console.log()` function in JavaScript?",
+        a: "To display an error message",
+        b: "To display a warning message",
+        c: "To print a message to the console",
+        d: "To ask the user for input",
+        correct: "c",
+      },
+      
+      {
+        question: "What is the difference between `==` and `===` in JavaScript?",
+        a: "They are both used for assignment",
+        b: "They are both used for comparison",
+        c: "One checks for value equality, while the other checks for type and value equality",
+        d: "One is used for strings, while the other is used for numbers",
+        correct: "c",
+      },
+      
+      {
+        question: "What is the name of the popular database management system developed by Oracle?",
+        a: "MySQL",
+        b: "PostgreSQL",
+        c: "Microsoft SQL Server",
+        d: "Oracle Database",
+        correct: "d",
+      },
+      
+      {
+        question: "What is the purpose of the `break` statement in a loop?",
+        a: "To skip to the next iteration",
+        b: "To exit the loop",
+        c: "To continue to the next statement",
+        d: "To restart the loop",
+        correct: "b",
+      },
+      
+      {
+        question: "What is the difference between a `class` and an `interface` in object-oriented programming?",
+        a: "A class is abstract, while an interface is concrete",
+        b: "A class is concrete, while an interface is abstract",
+        c: "A class is used for inheritance, while an interface is used for polymorphism",
+        d: "A class is used for polymorphism, while an interface is used for inheritance",
+        correct: "b",
+      },
+      
+      {
+        question: "What is the name of the popular web development framework developed by Google?",
+        a: "Angular",
+        b: "React",
+        c: "Vue.js",
+        d: "Ember.js",
+        correct: "a",
+      },
+      
+      {
+        question: "What is the purpose of the `try`-`catch` block in JavaScript?",
+        a: "To handle errors and exceptions",
+        b: "To optimize code performance",
+        c: "To improve code readability",
+        d: "To add comments to code",
+        correct: "a",
+      },
+];
+
+const quiz = document.getElementById('quiz')
+const answerEls = document.querySelectorAll('.answer')
+const questionEl = document.getElementById('question')
+const a_text = document.getElementById('a_text')
+const b_text = document.getElementById('b_text')
+const c_text = document.getElementById('c_text')
+const d_text = document.getElementById('d_text')
+const submitBtn = document.getElementById('submit')
+
+let currentQuiz = 0
+let score = 0
+
+loadQuiz()
+
+function loadQuiz() {
+    deselectAnswers()
+
+    const currentQuizData = quizData[currentQuiz]
+
+    questionEl.innerText = currentQuizData.question
+    a_text.innerText = currentQuizData.a
+    b_text.innerText = currentQuizData.b
+    c_text.innerText = currentQuizData.c
+    d_text.innerText = currentQuizData.d
+}
+
+function deselectAnswers() {
+    answerEls.forEach(answerEl => answerEl.checked = false)
+}
+
+function getSelected() {
+    let answer
+
+    answerEls.forEach(answerEl => {
+        if(answerEl.checked) {
+            answer = answerEl.id
+        }
+    })
+
+    return answer
+}
+
+submitBtn.addEventListener('click', () => {
+    const answer = getSelected()
+    
+    if(answer) {
+        if(answer === quizData[currentQuiz].correct) {
+            score++
+        }
+
+        currentQuiz++
+
+        if(currentQuiz < quizData.length) {
+            loadQuiz()
+        } else {
+            quiz.innerHTML = `
+                <h2>You answered ${score}/${quizData.length} questions correctly</h2>
+
+                <button onclick="location.reload()">Reload</button>
+            `
+        }
+    }
+})
